@@ -1,0 +1,16 @@
+<div class="jumbotron">
+  <h1>Add your site below</h1>
+  <!-- <img src="images/{{screenshot}}" alt="Screenshot"><br> -->
+  <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p> -->
+</div>
+<form role="form" novalidate class="css-form">
+  <div class="form-group">
+    <label for="url">Website URL</label>
+    <input ng-model="site.url" type="text" class="form-control" name="url" placeholder="URL... This will be used to get a screenshot">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea ng-model="site.description"class="form-control" name="description" placeholder="Description"></textarea>
+  </div>
+  <button type="submit" ng-click="add(site)" class="btn btn-default">Submit</button>
+</form>

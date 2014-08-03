@@ -7,7 +7,8 @@
   <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 
-<div class="row marketing" ng-repeat="item in content">
-  <h4>{{ item.title }}</h4>
-  <p>{{ item.content }}</p>
+<div class="row marketing" ng-repeat="site in sites">
+  <h4>{{site.url}}</h4>
+  <p>{{site.description}}</p>
+
 </div>

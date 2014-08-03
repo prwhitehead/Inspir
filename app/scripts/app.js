@@ -10,12 +10,9 @@
  */
 angular
   .module('angularjsApp', [
-    'ngAnimate',
-    'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+    'ngSanitize'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,9 +24,17 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/favourites', {
-        templateUrl: 'views/favourites.html',
-        controller: 'FavouritesCtrl'
+      .when('/add', {
+        templateUrl: 'views/add.html',
+        controller: 'AddCtrl'
+      })
+      .when('/edit', {
+        templateUrl: 'views/edit.html',
+        controller: 'EditCtrl'
+      })
+      .when('/edit', {
+        templateUrl: 'views/edit.html',
+        controller: 'EditCtrl'
       })
       .otherwise({
         redirectTo: '/'
