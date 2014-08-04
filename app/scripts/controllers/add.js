@@ -7,26 +7,41 @@
  * # AddCtrl
  * Controller of the angularjsApp
  */
+
 angular
     .module('angularjsApp')
     .controller('AddCtrl', function ($scope, $http) {
+        var messageDefault = 'Awaiting your url';
+        $scope.message = messageDefault;
+        $scope.screenshot = null;
+        $scope.status = '';
+
         $scope.add = function(site){
-            console.log(site);
+
+            $scope.screenshot = '/images/working.gif';
+            $scope.message = 'Working...';
             $http({
                 url: 'http://localhost:3000/site',
                 method: 'POST',
                 data: site
             })
-            .success(function(data, status, headers, config){
-                $scope.reset();
+            .success(function(response, status){
+
+                if (status === 200) {
+                    $scope.message = response.success;
+                    $scope.screenshot = '/images/screenshots/' + response.data.src;
+                }
+
                 $scope.status = status;
             })
-            .error(function(data, status, headers, config){
+            .error(function(data, status){
                 $scope.status = status;
             });
         };
 
         $scope.reset = function(){
             $scope.site = {};
+            $scope.message = messageDefault;
+            $scope.screenshot = null;
         };
     });

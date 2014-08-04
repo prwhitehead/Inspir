@@ -1,7 +1,7 @@
-<div class="jumbotron">
+<div class="jumbotron" >
   <h1>Add your site below</h1>
-  <!-- <img src="images/{{screenshot}}" alt="Screenshot"><br> -->
-  <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p> -->
+  <img ng-show="screenshot" src="{{screenshot}}" alt="Screenshot"><br>
+  <p>{{message}}</p>
 </div>
 <form role="form" novalidate class="css-form">
   <div class="form-group">
@@ -13,4 +13,5 @@
     <textarea ng-model="site.description"class="form-control" name="description" placeholder="Description"></textarea>
   </div>
   <button type="submit" ng-click="add(site)" class="btn btn-default">Submit</button>
+  <button type="reset" ng-click="reset()" class="btn btn-default">Reset</button>
 </form>
