@@ -1,6 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head>
+    <base href="/" />
+
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
@@ -23,8 +25,8 @@
     <div class="container">
         <div class="header">
           <ul class="nav nav-pills pull-right">
-            <li class="active"><a ng-href="#">List</a></li>
-            <li><a ng-href="#/add">Add</a></li>
+            <li ng-class="{ on: home }"><a ng-href="#" >List</a></li>
+            <li ng-class="{ on: isAdd }"><a ng-href="#/add">Add</a></li>
           </ul>
           <h3 class="text-muted">Inspir</h3>
         </div>
@@ -48,18 +50,6 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
@@ -68,7 +58,7 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/list.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/add.js"></script>
         <script src="scripts/controllers/edit.js"></script>

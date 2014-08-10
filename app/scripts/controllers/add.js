@@ -16,7 +16,7 @@ angular
         $scope.screenshot = null;
         $scope.status = '';
 
-        $scope.add = function(site){
+        $scope.save = function(site){
 
             $scope.screenshot = '/images/working.gif';
             $scope.message = 'Working...';

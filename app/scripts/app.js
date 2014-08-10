@@ -14,29 +14,23 @@ angular
     'ngRoute',
     'ngSanitize'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/list', {
+        templateUrl: 'views/list.html',
+        controller: 'ListCtrl'
       })
       .when('/add', {
-        templateUrl: 'views/add.html',
+        templateUrl: 'views/form.html',
         controller: 'AddCtrl'
       })
-      .when('/edit', {
-        templateUrl: 'views/edit.html',
-        controller: 'EditCtrl'
-      })
-      .when('/edit', {
-        templateUrl: 'views/edit.html',
+      .when('/edit/:id', {
+        templateUrl: 'views/form.html',
         controller: 'EditCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/list'
       });
+
+    // $locationProvider.html5Mode(true);
   });

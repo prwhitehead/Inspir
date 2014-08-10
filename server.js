@@ -61,6 +61,15 @@ app.get('/sites', function(req, res){
     });
 });
 
+app.get('/site/:id', function(req, res){
+
+    Site.find({
+        _id: req.params.id
+    }, function(err, site){
+        res.send(site[0]);
+    });
+});
+
 app.post('/site', function(req, res){
 
     if (req.body.length === 0) {
