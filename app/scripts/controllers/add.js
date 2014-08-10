@@ -26,10 +26,11 @@ angular
                 data: site
             })
             .success(function(response, status){
+              console.log(response);
 
                 if (status === 200) {
                     $scope.message = response.success;
-                    $scope.screenshot = '/images/screenshots/' + response.data.src;
+                    $scope.screenshot = '/images/screenshots/' + response.data.md;
                 }
 
                 $scope.status = status;
