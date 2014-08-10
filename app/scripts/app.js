@@ -21,11 +21,11 @@ angular
         controller: 'ListCtrl'
       })
       .when('/add', {
-        templateUrl: 'views/form.html',
+        templateUrl: 'views/add.html',
         controller: 'AddCtrl'
       })
       .when('/edit/:id', {
-        templateUrl: 'views/form.html',
+        templateUrl: 'views/edit.html',
         controller: 'EditCtrl'
       })
       .otherwise({

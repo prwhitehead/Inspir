@@ -7,7 +7,6 @@
  * # AddCtrl
  * Controller of the angularjsApp
  */
-
 angular
     .module('angularjsApp')
     .controller('EditCtrl', function ($scope, $http, $routeParams) {
@@ -40,19 +39,16 @@ angular
 
         $scope.save = function(site){
 
-            $scope.screenshot = '/images/working.gif';
-            $scope.message = 'Working...';
             $http({
-                url: 'http://localhost:3000/site',
+                url: 'http://localhost:3000/site/' + $routeParams.id,
                 method: 'POST',
                 data: site
             })
             .success(function(response, status){
-              console.log(response);
 
                 if (status === 200) {
                     $scope.message = response.success;
-                    $scope.screenshot = '/images/screenshots/' + response.data.md;
+                    $scope.screenshot = '/images/screenshots/' + response.data.lg;
                 }
 
                 $scope.status = status;

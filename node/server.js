@@ -37,7 +37,8 @@ var siteSchema = mongoose.Schema({
     orig: String,
     sm: String,
     md: String,
-    lg: String
+    lg: String,
+    tags: Array
 });
 
 var Site = mongoose.model('Site', siteSchema);
@@ -70,7 +71,29 @@ app.get('/site/:id', function(req, res){
     });
 });
 
-app.post('/site', function(req, res){
+app.post('/site/:id', function(req, res){
+    var query = {
+        _id: req.params.id
+    };
+
+    var newData = {
+        desc: req.body.desc,
+    };
+
+    Site.findOneAndUpdate(query, newData, {upsert: true}, function(err, site){
+        if (err) {
+            throwError('Couldnt update the document');
+        }
+
+        res.end(JSON.stringify({
+            status: 200,
+            data: site,
+            success: 'Document updated'
+        }));
+    });
+});
+
+app.put('/site', function(req, res){
 
     if (req.body.length === 0) {
         throwError('No site data found', res);
@@ -102,15 +125,13 @@ app.post('/site', function(req, res){
                                 sm: response[0],
                                 md: response[1],
                                 lg: response[2],
+                                tags: []
                             });
 
                             newSite.save(function(err){
 
                                 if (err) {
-                                    res.end(JSON.stringify({
-                                        status: 500,
-                                        error: 'Couldnt save the item'
-                                    }));
+                                    throwError('Couldnt save the item');
                                 }
 
                                 res.end(JSON.stringify({

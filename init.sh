@@ -1,3 +1,3 @@
 mongod &
-nodemon server.js &
+nodemon ./node/server.js &
 grunt server &

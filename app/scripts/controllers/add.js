@@ -7,10 +7,9 @@
  * # AddCtrl
  * Controller of the angularjsApp
  */
-
 angular
     .module('angularjsApp')
-    .controller('AddCtrl', function ($scope, $http) {
+    .controller('AddCtrl', function ($scope, $http, $location) {
         var messageDefault = 'Awaiting your url';
         $scope.message = messageDefault;
         $scope.screenshot = null;
@@ -22,15 +21,13 @@ angular
             $scope.message = 'Working...';
             $http({
                 url: 'http://localhost:3000/site',
-                method: 'POST',
+                method: 'PUT',
                 data: site
             })
             .success(function(response, status){
-              console.log(response);
 
                 if (status === 200) {
-                    $scope.message = response.success;
-                    $scope.screenshot = '/images/screenshots/' + response.data.md;
+                    return $location.path('/edit/' + response.data._id);
                 }
 
                 $scope.status = status;
