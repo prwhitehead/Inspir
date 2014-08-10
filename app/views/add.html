@@ -1,6 +1,5 @@
 <div class="jumbotron" >
   <img ng-hide="! screenshot" src="{{screenshot}}" alt="Screenshot"><br>
-  <p>{{message}}</p>
 </div>
 <form role="form" novalidate class="css-form">
   <div class="form-group">
@@ -8,12 +7,12 @@
     <input ng-model="site.url" type="text" class="form-control" name="url" placeholder="URL... This will be used to get a screenshot">
   </div>
   <div class="form-group">
-    <label for="tags">Tags</label>
-    <input ng-model="site.tags" type="text" class="form-control" name="tags" placeholder="Site tags">
-  </div>
-  <div class="form-group">
     <label for="description">Description</label>
     <textarea ng-model="site.desc"class="form-control" name="desc" placeholder="Description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="tags">Tags</label>
+    <input ng-model="tags" type="text" class="form-control" name="tags" placeholder="Site tags">
   </div>
   <button type="submit" ng-click="save(site)" class="btn btn-default">Submit</button>
   <button type="reset" ng-click="reset()" class="btn btn-default">Reset</button>

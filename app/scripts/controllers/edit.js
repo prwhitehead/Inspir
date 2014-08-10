@@ -16,6 +16,7 @@ angular
         $scope.screenshot = null;
         $scope.status = '';
         $scope.site = {};
+        $scope.tags = '';
 
         $scope.screenshot = '/images/working.gif';
         $scope.message = 'Working...';
@@ -29,6 +30,15 @@ angular
                 $scope.message = response.success;
                 $scope.site = response;
                 $scope.screenshot = '/images/screenshots/' + response.lg;
+
+                var tags = [];
+                if (response.tags.length > 0) {
+                    for(var i=0; i < response.tags.length; i++) {
+                        tags.push(response.tags[i].tag);
+                    }
+
+                    $scope.tags = tags.join(', ');
+                }
             }
 
             $scope.status = status;

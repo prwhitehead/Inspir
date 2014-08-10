@@ -14,8 +14,8 @@ var webshot = require('webshot');
 var slug = require('slug');
 var fs = require('fs');
 var easyimg = require('easyimage');
-// var util = require('util'); //debug only
 var processImages = require('./helpers/processImages.js');
+var processTags = require('./helpers/processTags.js');
 
 mongoose.connect('mongodb://localhost/simple');
 var db = mongoose.connection;
@@ -63,11 +63,10 @@ app.get('/sites', function(req, res){
 });
 
 app.get('/site/:id', function(req, res){
-
     Site.find({
         _id: req.params.id
     }, function(err, site){
-        res.send(site[0]);
+        return res.send(site[0]);
     });
 });
 
@@ -78,6 +77,7 @@ app.post('/site/:id', function(req, res){
 
     var newData = {
         desc: req.body.desc,
+        tags: processTags(req.body.tags, ',')
     };
 
     Site.findOneAndUpdate(query, newData, {upsert: true}, function(err, site){
@@ -125,7 +125,7 @@ app.put('/site', function(req, res){
                                 sm: response[0],
                                 md: response[1],
                                 lg: response[2],
-                                tags: []
+                                tags: processTags(req.body.tags, ',')
                             });
 
                             newSite.save(function(err){
