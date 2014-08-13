@@ -11,6 +11,18 @@ angular
     .module('angularjsApp')
     .controller('EditCtrl', function ($scope, $http, $routeParams) {
 
+        var processTags = function (tags) {
+            var processed = [];
+
+            if (tags !== undefined && tags.length > 0) {
+                for (var i=0; i<tags.length; i++) {
+                    processed.push(tags[i].tag);
+                }
+            }
+
+            return processed.join(', ');
+        };
+
         var messageDefault = 'Edit';
         $scope.title = messageDefault;
         $scope.screenshot = null;
@@ -24,24 +36,10 @@ angular
             url: 'http://localhost:3000/site/' + $routeParams.id,
             method: 'GET'
         })
-        .success(function(response, status){
-
-            if (status === 200) {
-                $scope.message = response.success;
-                $scope.site = response;
-                $scope.screenshot = '/images/screenshots/' + response.lg;
-
-                var tags = [];
-                if (response.tags.length > 0) {
-                    for(var i=0; i < response.tags.length; i++) {
-                        tags.push(response.tags[i].tag);
-                    }
-
-                    $scope.tags = tags.join(', ');
-                }
-            }
-
-            $scope.status = status;
+        .success(function (response){
+            $scope.site = response.data;
+            $scope.site.tags = processTags(response.data.tags);
+            $scope.screenshot = '/images/screenshots/' + response.data.lg;
         })
         .error(function(data, status){
             $scope.status = status;
@@ -54,14 +52,10 @@ angular
                 method: 'POST',
                 data: site
             })
-            .success(function(response, status){
-
-                if (status === 200) {
-                    $scope.message = response.success;
-                    $scope.screenshot = '/images/screenshots/' + response.data.lg;
-                }
-
-                $scope.status = status;
+            .success(function (response){
+                $scope.site = response.data;
+                $scope.site.tags = processTags(response.data.tags);
+                $scope.screenshot = '/images/screenshots/' + response.data.lg;
             })
             .error(function(data, status){
                 $scope.status = status;

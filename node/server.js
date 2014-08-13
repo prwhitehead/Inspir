@@ -21,10 +21,12 @@ mongoose.connect('mongodb://localhost/simple');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB Connection Error'));
 db.once('open', function(){
-    // console.log('DB connection open for business');
+    console.log('DB connected');
 });
 
 function throwError(message, response, error) {
+    console.log('ERROR: ' + message);
+
     response.end(JSON.stringify({
         status: 500,
         error: message + ' ' + error
@@ -58,15 +60,25 @@ var webShotOptions = {
 
 app.get('/sites', function(req, res){
     Site.find(function(err, doc){
+        console.log('Returning all documents from GET request');
+
         res.send(doc);
     });
 });
 
 app.get('/site/:id', function(req, res){
-    Site.find({
+
+    Site.findOne({
         _id: req.params.id
+
     }, function(err, site){
-        return res.send(site[0]);
+        console.log('Returning document '+ req.params.id +' from GET request');
+
+        res.end(JSON.stringify({
+            status: 200,
+            data: site,
+            success: 'Document found'
+        }));
     });
 });
 
@@ -84,6 +96,8 @@ app.post('/site/:id', function(req, res){
         if (err) {
             throwError('Couldnt update the document');
         }
+
+        console.log('Updating document from POST request', '----------');
 
         res.end(JSON.stringify({
             status: 200,
@@ -117,6 +131,7 @@ app.put('/site', function(req, res){
                 .then(
                     function(image) {
                         processImages(targetImagePath, image, function(response){
+                            console.log('Saving data');
 
                             var newSite = new Site({
                                 url: req.body.url,
@@ -128,15 +143,18 @@ app.put('/site', function(req, res){
                                 tags: processTags(req.body.tags, ',')
                             });
 
-                            newSite.save(function(err){
+                            newSite.save(function(err, site){
+
 
                                 if (err) {
                                     throwError('Couldnt save the item');
                                 }
 
+                                console.log('Created document from PUT request', '----------------');
+
                                 res.end(JSON.stringify({
                                     status: 200,
-                                    data: newSite,
+                                    data: site,
                                     success: 'New site saved'
                                 }));
                             });

@@ -37,7 +37,10 @@ module.exports = function (src, imageData, callback) {
             .then(
                 function(image){
                     cropResult.push(image.name);
+
                     if (cropResult.length === thumbSizes.length) {
+                        console.log('Finished reszing images');
+
                         return callback(cropResult);
                     }
                 },

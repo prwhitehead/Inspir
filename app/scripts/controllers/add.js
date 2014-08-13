@@ -26,6 +26,7 @@ angular
             })
             .success(function(response, status){
 
+                //on success redirect to the edit post
                 if (status === 200) {
                     return $location.path('/edit/' + response.data._id);
                 }
