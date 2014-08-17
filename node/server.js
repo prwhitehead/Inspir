@@ -55,7 +55,7 @@ var webShotOptions = {
         width: 'all'
     },
     userAgent: 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36',
-    javascriptEnabled: true,
+    javascriptEnabled: true
 };
 
 app.get('/sites', function(req, res){
@@ -63,6 +63,30 @@ app.get('/sites', function(req, res){
         console.log('Returning all documents from GET request');
 
         res.send(doc);
+    });
+});
+
+/**
+ * endpoint for returning results by tag
+ *
+ * @param  {object} req Request
+ * @param  {object} res Response
+ * @return {object}     Response
+ * db.sites.find({tags: {$elemMatch: {slug: "yum"}}})
+ */
+app.get('/site/tag/:tag', function(req, res){
+    Site.find({'tags.slug': req.params.tag}, function(err, result){
+        if (err) {
+            throwError(err);
+        }
+
+        console.log('Returning Documents found matching tag "'+ req.params.tag +'"');
+
+        res.end(JSON.stringify({
+            status: 200,
+            data: result,
+            success: 'Documents found matching tag "'+ req.params.tag +'"'
+        }));
     });
 });
 

@@ -1,7 +1,11 @@
-<div class="row marketing" ng-repeat="site in sites">
-  <h4>{{site.url}}</h4>
-  <p>{{site.desc}}</p>
-  <br>
-  <a href="#/edit/{{ site._id }}"><img src="/images/screenshots/{{site.md}}" alt="Screenshot"></a>
-  <br>
+<input type="text" ng-model="searchText">
+<div class="row">
+    <div class="marketing col-lg-6" ng-repeat="site in sites | filter:searchText">
+      <h4>{{site.url}}</h4>
+      <p>{{site.desc}}</p>
+      <br>
+      <a href="#/edit/{{ site._id }}"><img src="/images/screenshots/{{site.md}}" alt="Screenshot"></a>
+      <br>
+      <a ng-repeat="tag in site.tags" href="#/tag/{{ tag.slug }}">{{ tag.tag }}</a>
+    </div>
 </div>

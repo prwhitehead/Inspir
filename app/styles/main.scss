@@ -72,6 +72,15 @@ body {
   }
 }
 
+.marketing {
+
+    a {
+        max-height: 100px;
+        overflow: hidden;
+        display: block;
+    }
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

@@ -28,6 +28,10 @@ angular
         templateUrl: 'views/edit.html',
         controller: 'EditCtrl'
       })
+      .when('/tag/:tag', {
+        templateUrl: 'views/list.html',
+        controller: 'TagCtrl'
+      })
       .otherwise({
         redirectTo: '/list'
       });

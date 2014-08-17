@@ -9,6 +9,7 @@
  */
 angular.module('angularjsApp')
   .controller('ListCtrl', function ($scope, $http) {
+    $scope.search = true;
     $http
       .get('http://localhost:3000/sites')
       .success(function(result){
